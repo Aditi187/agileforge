@@ -56,16 +56,19 @@ export default function Login() {
           </button>
         </form>
 
-        <div className="demo-creds">
-          <div className="demo-creds-title">🚀 Demo Credentials</div>
-          {DEMO.map(d => (
-            <div key={d.role} className="demo-cred-row">
-              <span className="role">{d.role}</span>
-              <span className="cred" onClick={() => fillDemo(d)} title="Click to fill">{d.email}</span>
-              <span className="cred" style={{ color: 'var(--text-muted)' }}>{d.password}</span>
-            </div>
-          ))}
-          <div style={{ fontSize: 11, color: 'var(--text-muted)', marginTop: 8 }}>Click email to auto-fill credentials</div>
+        <div className="demo-login-options">
+          <div className="demo-label">Quick Sign In</div>
+          <div className="demo-buttons">
+            <button type="button" onClick={() => fillDemo(DEMO[0])} className="demo-btn">
+              Admin
+            </button>
+            <button type="button" onClick={() => fillDemo(DEMO[1])} className="demo-btn">
+              Lead
+            </button>
+            <button type="button" onClick={() => fillDemo(DEMO[2])} className="demo-btn">
+              Developer
+            </button>
+          </div>
         </div>
       </div>
     </div>

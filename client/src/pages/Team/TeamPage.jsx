@@ -51,9 +51,7 @@ export default function TeamPage() {
           const stats = getMemberStats(member._id)
           const isLead = project?.lead?._id === member._id
           return (
-            <div key={member._id} className="card" style={{ transition: 'transform 0.15s' }}
-              onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-2px)'}
-              onMouseLeave={e => e.currentTarget.style.transform = ''}>
+            <div key={member._id} className="card">
               <div style={{ display: 'flex', gap: 14, alignItems: 'flex-start', marginBottom: 16 }}>
                 <img className="avatar avatar-lg" src={member.avatar} alt={member.name} />
                 <div style={{ flex: 1, minWidth: 0 }}>

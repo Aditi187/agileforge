@@ -114,10 +114,8 @@ export default function ProjectsPage() {
       ) : (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px,1fr))', gap: 16 }}>
           {projects.map(proj => (
-            <div key={proj._id} className="card" style={{ borderTop: `3px solid ${proj.color}`, cursor: 'pointer', transition: 'transform 0.15s, border-color 0.15s' }}
+            <div key={proj._id} className="project-card" style={{ borderTop: `3px solid ${proj.color}` }}
               onClick={() => navigate(`/projects/${proj._id}/dashboard`)}
-              onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-2px)'}
-              onMouseLeave={e => e.currentTarget.style.transform = ''}
             >
               <div className="flex items-center gap-3 mb-4" style={{ marginBottom: 14 }}>
                 <div style={{ width: 40, height: 40, borderRadius: 10, background: proj.color + '22', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

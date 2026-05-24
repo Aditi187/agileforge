@@ -56,9 +56,7 @@ export default function Backlog() {
   }))
 
   const IssueRow = ({ issue }) => (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '9px 14px', borderBottom: '1px solid var(--border)', transition: 'background 0.1s' }}
-      onMouseEnter={e => e.currentTarget.style.background = 'var(--bg-hover)'}
-      onMouseLeave={e => e.currentTarget.style.background = ''}>
+    <div className="backlog-row">
       <span>{TYPE_ICONS[issue.type]}</span>
       <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-muted)', width: 80, flexShrink: 0 }}>{issue.issueKey}</span>
       <span style={{ flex: 1, fontSize: 13 }}>{issue.title}</span>
