@@ -31,7 +31,7 @@ const seedDB = async () => {
     const users = await User.create([
       {
         name: 'Aditi Sharma',
-        email: 'admin@agileforge.dev',
+        email: 'aditi.sharma@gmail.com',
         password: 'Admin@123',
         role: 'admin',
         designation: 'Engineering Manager',
@@ -39,7 +39,7 @@ const seedDB = async () => {
       },
       {
         name: 'Rahul Verma',
-        email: 'lead@agileforge.dev',
+        email: 'rahul.verma@gmail.com',
         password: 'Lead@123',
         role: 'project_lead',
         designation: 'Senior Developer',
@@ -47,7 +47,7 @@ const seedDB = async () => {
       },
       {
         name: 'Priya Patel',
-        email: 'dev@agileforge.dev',
+        email: 'priya.patel@gmail.com',
         password: 'Dev@123',
         role: 'developer',
         designation: 'Full Stack Developer',
@@ -55,7 +55,7 @@ const seedDB = async () => {
       },
       {
         name: 'Arjun Singh',
-        email: 'arjun@agileforge.dev',
+        email: 'arjun.singh@gmail.com',
         password: 'Dev@123',
         role: 'developer',
         designation: 'Frontend Developer',
@@ -63,7 +63,7 @@ const seedDB = async () => {
       },
       {
         name: 'Sneha Gupta',
-        email: 'sneha@agileforge.dev',
+        email: 'sneha.gupta@gmail.com',
         password: 'Dev@123',
         role: 'developer',
         designation: 'Backend Developer',
@@ -71,7 +71,7 @@ const seedDB = async () => {
       },
       {
         name: 'Vikram Kumar',
-        email: 'vikram@agileforge.dev',
+        email: 'vikram.kumar@gmail.com',
         password: 'Dev@123',
         role: 'viewer',
         designation: 'QA Engineer',
@@ -333,9 +333,9 @@ const seedDB = async () => {
     console.log('\n✨ Database seeded successfully!\n');
     console.log('Demo Credentials:');
     console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-    console.log('Admin:        admin@agileforge.dev / Admin@123');
-    console.log('Project Lead: lead@agileforge.dev / Lead@123');
-    console.log('Developer:    dev@agileforge.dev / Dev@123');
+    console.log('Admin:        aditi.sharma@gmail.com / Admin@123');
+    console.log('Project Lead: rahul.verma@gmail.com / Lead@123');
+    console.log('Developer:    priya.patel@gmail.com / Dev@123');
     console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
 
     process.exit(0);

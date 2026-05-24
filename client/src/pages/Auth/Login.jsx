@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom'
 import useAuthStore from '../../store/authStore'
 
 const DEMO = [
-  { role: 'Admin', email: 'admin@agileforge.dev', password: 'Admin@123' },
-  { role: 'Lead', email: 'lead@agileforge.dev', password: 'Lead@123' },
-  { role: 'Dev', email: 'dev@agileforge.dev', password: 'Dev@123' }
+  { role: 'Admin', email: 'aditi.sharma@gmail.com', password: 'Admin@123' },
+  { role: 'Lead', email: 'rahul.verma@gmail.com', password: 'Lead@123' },
+  { role: 'Dev', email: 'priya.patel@gmail.com', password: 'Dev@123' }
 ]
 
 export default function Login() {
@@ -42,7 +42,7 @@ export default function Login() {
         <form className="auth-form" onSubmit={handleSubmit}>
           <div className="form-group">
             <label className="label">Email</label>
-            <input className="input" type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="you@agileforge.dev" required />
+            <input className="input" type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="e.g. aditi.sharma@gmail.com" required />
           </div>
           <div className="form-group">
             <label className="label">Password</label>

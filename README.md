@@ -1,182 +1,68 @@
-# AgileForge 🚀
+# AgileForge
 
-A full-stack **Agile Project Management System** inspired by Jira, built from scratch using the **MERN Stack** (MongoDB, Express.js, React, Node.js).
+A full-stack Agile project management tool inspired by Jira, built with MongoDB, Express, React, and Node.js (MERN stack). This application provides teams with an intuitive way to plan sprints, manage backlogs, track issues on a Kanban board, and view team productivity statistics.
 
-![AgileForge](https://img.shields.io/badge/Stack-MERN-6366f1?style=for-the-badge)
-![License](https://img.shields.io/badge/License-MIT-22c55e?style=for-the-badge)
+## Core Features
 
----
+* **Kanban Board**: Drag-and-drop workflow system to update issue statuses (`Backlog`, `To Do`, `In Progress`, `In Review`, `Done`) in real-time.
+* **Sprint Lifecycle**: Create sprints, assign issues, start active sprints, and complete sprints (with automated rollover of uncompleted tasks).
+* **Backlog Management**: A dedicated page to drag and drop issues between the project backlog and planned sprints.
+* **Team Dashboard**: Visual statistics showing sprint progress, issue breakdown by type/priority, and recent activity logs.
+* **Team Analytics & Leaderboard**: Track story points completed by team members with a gamified leaderboard.
+* **Issue Discussions**: Leave comments directly on issues to discuss status updates.
+* **Role-Based Authentication**: Secure JWT-based access control with different operations permitted for Admins, Project Leads, and Developers.
 
-## ✨ Features
+## Tech Stack
 
-- 🔐 **JWT Authentication** — Secure login with role-based access (Admin, Project Lead, Developer, Viewer)
-- 📊 **Dashboard** — KPI cards, issue distribution charts, sprint progress, activity feed
-- 🗂️ **Kanban Board** — Drag-and-drop issue cards across 5 columns (Backlog → Done)
-- 📋 **Backlog Management** — Move issues between sprints and backlog
-- ⚡ **Sprint Management** — Create, start, and complete sprints with lifecycle control
-- 👥 **Team Page** — Member performance cards, stats, and leaderboard
-- 💬 **Comments** — Add comments to issues with real-time UI updates
-- 📈 **Charts** — Recharts-powered pie, bar charts for data visualization
-- 🌱 **Seed Data** — 6 users, 2 projects, 4 sprints, 21 issues pre-loaded
+* **Frontend**: React 18, React Router v6, TanStack Query (React Query) for server state caching, Zustand for lightweight local state management, Recharts for charts, and `@dnd-kit/core` for drag-and-drop board functionality.
+* **Backend**: Node.js, Express.js, Mongoose ODM, JWT authentication, and bcryptjs.
 
----
-
-## 🛠️ Tech Stack
-
-| Layer | Technology |
-|---|---|
-| Frontend | React 18 + Vite |
-| State Management | Zustand + TanStack Query |
-| Charts | Recharts |
-| Drag & Drop | @dnd-kit/core |
-| Backend | Node.js + Express.js |
-| Database | MongoDB + Mongoose |
-| Auth | JWT + bcryptjs |
-
----
-
-## 🚀 Quick Start
+## Getting Started
 
 ### Prerequisites
+* Node.js (v18 or higher recommended)
+* MongoDB (Local instance or MongoDB Atlas cluster connection URI)
 
-- Node.js v18+ 
-- MongoDB (local or [MongoDB Atlas](https://www.mongodb.com/atlas))
-- npm or yarn
+### Setup Instructions
 
-### 1. Clone the Repository
+1. **Clone and navigate to the directory**:
+   ```bash
+   git clone https://github.com/Aditi187/agileforge.git
+   cd agileforge
+   ```
 
-```bash
-git clone https://github.com/YOUR_USERNAME/agileforge.git
-cd agileforge
-```
+2. **Configure environment variables**:
+   Create a `.env` file in the `/server` directory:
+   ```env
+   PORT=5000
+   MONGO_URI=your_mongodb_connection_string
+   JWT_SECRET=some_strong_secret_key
+   CLIENT_URL=http://localhost:5173
+   ```
 
-### 2. Configure Environment Variables
+3. **Install dependencies**:
+   Run the utility script in the root directory to install root, backend, and frontend packages:
+   ```bash
+   npm run install-all
+   ```
 
-```bash
-cp .env.example server/.env
-```
+4. **Seed sample data**:
+   Populate the database with demo users, sprints, issues, and activities:
+   ```bash
+   npm run seed
+   ```
 
-Edit `server/.env`:
+5. **Start the development servers**:
+   ```bash
+   npm run dev
+   ```
+   * Frontend: http://localhost:5173
+   * Backend API: http://localhost:5000
 
-```env
-MONGO_URI=mongodb+srv://<username>:<password>@cluster0.xxxxx.mongodb.net/agileforge
-JWT_SECRET=your_super_secret_jwt_key_here
-PORT=5000
-CLIENT_URL=http://localhost:5173
-```
+## Sample Users for Testing
 
-> For local MongoDB use: `MONGO_URI=mongodb://localhost:27017/agileforge`
+Clicking any credential on the login screen will auto-fill it:
 
-### 3. Install Dependencies
-
-```bash
-npm run install-all
-```
-
-This installs dependencies for root, server, and client.
-
-### 4. Seed the Database
-
-```bash
-npm run seed
-```
-
-This creates 6 demo users, 2 projects, 4 sprints, and 21 issues.
-
-### 5. Run the Application
-
-```bash
-npm run dev
-```
-
-- **Frontend**: http://localhost:5173
-- **Backend API**: http://localhost:5000/api
-
----
-
-## 🔑 Demo Credentials
-
-| Role | Email | Password |
-|---|---|---|
-| Admin | admin@agileforge.dev | Admin@123 |
-| Project Lead | lead@agileforge.dev | Lead@123 |
-| Developer | dev@agileforge.dev | Dev@123 |
-
-> Demo credentials are shown on the login page — click to auto-fill!
-
----
-
-## 📁 Project Structure
-
-```
-agileforge/
-├── client/          # React Frontend (Vite)
-│   └── src/
-│       ├── components/   # Reusable UI components
-│       ├── pages/        # Route-level pages
-│       ├── store/        # Zustand state stores
-│       └── services/     # Axios API service
-│
-├── server/          # Express.js Backend
-│   ├── config/      # MongoDB connection
-│   ├── controllers/ # Route handler logic
-│   ├── middleware/  # JWT auth, error handler
-│   ├── models/      # Mongoose schemas
-│   ├── routes/      # API route definitions
-│   └── seed/        # Demo data seeder
-│
-├── .env.example
-└── README.md
-```
-
----
-
-## 🔌 API Endpoints
-
-| Method | Endpoint | Description |
-|---|---|---|
-| POST | /api/auth/login | Login user |
-| POST | /api/auth/register | Register user |
-| GET | /api/projects | Get all projects |
-| POST | /api/projects | Create project |
-| GET | /api/issues?project= | Get issues (filtered) |
-| POST | /api/issues | Create issue |
-| PUT | /api/issues/:id | Update issue |
-| GET | /api/sprints?project= | Get sprints |
-| PUT | /api/sprints/:id/start | Start sprint |
-| PUT | /api/sprints/:id/complete | Complete sprint |
-| GET | /api/comments?issue= | Get comments |
-| POST | /api/comments | Add comment |
-| GET | /api/activities?project= | Get activity log |
-
----
-
-## 🌐 Environment Variables
-
-| Variable | Description | Example |
-|---|---|---|
-| MONGO_URI | MongoDB connection string | mongodb+srv://... |
-| JWT_SECRET | JWT signing secret | random_secret_string |
-| PORT | Server port | 5000 |
-| CLIENT_URL | Frontend URL (for CORS) | http://localhost:5173 |
-
----
-
-## 📜 Git Commit Convention
-
-```
-feat: add kanban drag-and-drop
-fix: resolve CORS issue on sprint routes
-chore: update dependencies
-```
-
----
-
-## 🏗️ Built For
-
-MERN Stack Developer Intern — Technical Assessment  
-**Module**: Agile Project Management (Jira-inspired)
-
----
-
-*Built with ❤️ using MERN Stack*
+* **Admin User**: `aditi.sharma@gmail.com` / Password: `Admin@123`
+* **Project Lead**: `rahul.verma@gmail.com` / Password: `Lead@123`
+* **Developer**: `priya.patel@gmail.com` / Password: `Dev@123`
