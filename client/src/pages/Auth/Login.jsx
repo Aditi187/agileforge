@@ -28,23 +28,23 @@ export default function Login() {
       <div className="auth-card fade-in">
         <div className="auth-logo">
           <div className="logo-icon">
-            <Workflow size={22} color="#fff" />
+            <Workflow size={20} color="#fff" />
           </div>
-          <span className="auth-logo-text">AgileForge</span>
+          <span className="auth-logo-text">agile<span>forge</span></span>
         </div>
 
         <div className="auth-title">Welcome back</div>
         <div className="auth-subtitle">Sign in to your workspace</div>
 
         {error && (
-          <div style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.3)', borderRadius: 'var(--radius-sm)', padding: '10px 14px', color: 'var(--danger)', fontSize: 13, marginBottom: 16 }}>
+          <div style={{ background: 'rgba(211,47,47,0.08)', border: '1px solid rgba(211,47,47,0.2)', borderRadius: 'var(--radius-sm)', padding: '10px 14px', color: 'var(--danger)', fontSize: 13, marginBottom: 16 }}>
             {error}
           </div>
         )}
 
         <form className="auth-form" onSubmit={handleSubmit}>
           <div className="form-group">
-            <label className="label">Email</label>
+            <label className="label">Email Address</label>
             <input className="input" type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="e.g. aditi.sharma@gmail.com" required />
           </div>
           <div className="form-group">

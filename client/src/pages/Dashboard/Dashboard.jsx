@@ -1,25 +1,25 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
-import { AreaChart, Area, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts'
-import { CheckSquare, Bug, Zap, TrendingUp, ListTodo, BarChart2 } from 'lucide-react'
+import { BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts'
+import { CheckSquare, Bug, Zap, ListTodo } from 'lucide-react'
 import api from '../../services/api'
 
 const COLORS = {
-  done:       '#4ade80',
-  inprogress: '#7c6af7',
-  inreview:   '#a78bfa',
-  todo:       '#60a5fa',
-  backlog:    '#55556a'
+  done:       '#2e7d32', // green
+  inprogress: '#0056d2', // coursera blue
+  inreview:   '#7b1fa2', // purple
+  todo:       '#0288d1', // light blue
+  backlog:    '#78909c'  // grey-blue
 }
-const PIE_COLORS = ['#7c6af7','#4ade80','#fbbf24','#f87171','#55556a']
+const PIE_COLORS = ['#0056d2','#2e7d32','#f59e0b','#d32f2f','#78909c']
 
 const CustomTooltip = ({ active, payload, label }) => {
   if (!active || !payload?.length) return null
   return (
-    <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border-light)', borderRadius: 8, padding: '10px 14px', fontSize: 12 }}>
-      <div style={{ fontWeight: 600, marginBottom: 4 }}>{label}</div>
-      {payload.map(p => <div key={p.name} style={{ color: p.color }}>{p.name}: {p.value}</div>)}
+    <div style={{ background: '#ffffff', border: '1px solid var(--border)', borderRadius: 4, padding: '10px 14px', fontSize: 12, boxShadow: '0 2px 8px rgba(0,0,0,0.08)', color: '#1f1f1f' }}>
+      <div style={{ fontWeight: 700, marginBottom: 6 }}>{label}</div>
+      {payload.map(p => <div key={p.name} style={{ color: p.color, fontWeight: 600, display: 'flex', justifyContent: 'space-between', gap: 12 }}><span>{p.name}:</span> <span>{p.value}</span></div>)}
     </div>
   )
 }
@@ -64,12 +64,6 @@ export default function Dashboard() {
     name: t.charAt(0).toUpperCase() + t.slice(1),
     count: issues.filter(i => i.type === t).length
   }))
-
-  const burndownData = activeSprint ? sprintIssues.map((_, i) => ({
-    day: `Day ${i + 1}`,
-    remaining: sprintIssues.length - Math.floor((i / sprintIssues.length) * sprintIssues.filter(x => x.status === 'done').length),
-    ideal: Math.max(0, sprintIssues.length - Math.round((i / (sprintIssues.length || 1)) * sprintIssues.length))
-  })).slice(0, 10) : []
 
   const formatTime = (t) => {
     const d = (Date.now() - new Date(t)) / 1000
@@ -117,10 +111,10 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 24 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24, marginBottom: 24 }}>
         {/* Issue Status Pie */}
         <div className="card">
-          <div style={{ fontWeight: 700, marginBottom: 16 }}>Issue Distribution</div>
+          <div style={{ fontWeight: 700, fontSize: 15, color: '#1f1f1f', marginBottom: 16 }}>Issue Distribution</div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
             <ResponsiveContainer width={160} height={160}>
               <PieChart>
@@ -134,8 +128,8 @@ export default function Dashboard() {
               {statusData.map(d => (
                 <div key={d.name} style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
                   <div style={{ width: 10, height: 10, borderRadius: '50%', background: d.color, flexShrink: 0 }} />
-                  <span style={{ fontSize: 12, flex: 1 }}>{d.name}</span>
-                  <span style={{ fontSize: 12, fontWeight: 600 }}>{d.value}</span>
+                  <span style={{ fontSize: 12, flex: 1, color: 'var(--text-secondary)' }}>{d.name}</span>
+                  <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-primary)' }}>{d.value}</span>
                 </div>
               ))}
             </div>
@@ -144,10 +138,10 @@ export default function Dashboard() {
 
         {/* Issue Types Bar */}
         <div className="card">
-          <div style={{ fontWeight: 700, marginBottom: 16 }}>Issues by Type</div>
+          <div style={{ fontWeight: 700, fontSize: 15, color: '#1f1f1f', marginBottom: 16 }}>Issues by Type</div>
           <ResponsiveContainer width="100%" height={160}>
             <BarChart data={typeData} barSize={28}>
-              <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--border-light)" vertical={false} />
               <XAxis dataKey="name" tick={{ fill: 'var(--text-muted)', fontSize: 11 }} axisLine={false} tickLine={false} />
               <YAxis tick={{ fill: 'var(--text-muted)', fontSize: 11 }} axisLine={false} tickLine={false} />
               <Tooltip content={<CustomTooltip />} />
@@ -159,12 +153,12 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 16 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 24 }}>
         {/* Sprint Progress */}
         {activeSprint && (
           <div className="card">
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
-              <div style={{ fontWeight: 700 }}>Sprint Progress — {activeSprint.name}</div>
+              <div style={{ fontWeight: 700, fontSize: 15, color: '#1f1f1f' }}>Sprint Progress — {activeSprint.name}</div>
               <span className="chip chip-active">Active</span>
             </div>
             {['todo','inprogress','inreview','done'].map(status => {
@@ -175,7 +169,7 @@ export default function Dashboard() {
                 <div key={status} style={{ marginBottom: 14 }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, marginBottom: 5 }}>
                     <span style={{ color: 'var(--text-secondary)' }}>{label}</span>
-                    <span style={{ fontWeight: 600 }}>{count} <span style={{ color: 'var(--text-muted)' }}>({Math.round(pct)}%)</span></span>
+                    <span style={{ fontWeight: 700, color: 'var(--text-primary)' }}>{count} <span style={{ color: 'var(--text-muted)', fontWeight: 500 }}>({Math.round(pct)}%)</span></span>
                   </div>
                   <div className="progress-bar">
                     <div className="progress-fill" style={{ width: `${pct}%`, background: COLORS[status] }} />
@@ -188,7 +182,7 @@ export default function Dashboard() {
 
         {/* Activity Feed */}
         <div className="card">
-          <div style={{ fontWeight: 700, marginBottom: 14 }}>Recent Activity</div>
+          <div style={{ fontWeight: 700, fontSize: 15, color: '#1f1f1f', marginBottom: 14 }}>Recent Activity</div>
           {activities.length === 0 ? (
             <div className="text-muted text-sm">No recent activity</div>
           ) : (
@@ -197,7 +191,7 @@ export default function Dashboard() {
                 <img className="avatar avatar-sm" src={a.user?.avatar} alt={a.user?.name} style={{ flexShrink: 0 }} />
                 <div className="activity-content">
                   <div className="activity-text">
-                    <span style={{ marginRight: 4 }}>{actionIcon(a.action)}</span>
+                    <span style={{ marginRight: 4, fontWeight: 700, color: 'var(--accent)' }}>{actionIcon(a.action)}</span>
                     {a.details}
                   </div>
                   <div className="activity-time">{formatTime(a.createdAt)}</div>

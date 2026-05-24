@@ -1,49 +1,65 @@
-import React from 'react'
-import { useLocation, useParams } from 'react-router-dom'
-import { useQuery } from '@tanstack/react-query'
-import { Bell, Search } from 'lucide-react'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { Bell, Search, Globe, ChevronDown, LogOut, Workflow } from 'lucide-react'
 import useAuthStore from '../../store/authStore'
-import api from '../../services/api'
-
-const PAGE_TITLES = {
-  dashboard: 'Dashboard',
-  board: 'Board',
-  backlog: 'Backlog',
-  sprints: 'Sprints',
-  team: 'Team',
-  projects: 'All Projects'
-}
 
 export default function Topbar() {
-  const { user } = useAuthStore()
-  const location = useLocation()
-  const parts = location.pathname.split('/')
-  const seg = parts[3] || parts[1]
-  const projectId = parts[2]
+  const navigate = useNavigate()
+  const { user, logout } = useAuthStore()
+  const [dropdownOpen, setDropdownOpen] = useState(false)
 
-  const { data: project } = useQuery({
-    queryKey: ['project', projectId],
-    queryFn: () => api.get(`/projects/${projectId}`).then(r => r.data),
-    enabled: !!projectId && projectId !== 'projects'
-  })
-
-  const title = PAGE_TITLES[seg] || 'AgileForge'
-  const subtitle = project ? `${project.key} · ${project.name}` : ''
+  const handleLogout = () => {
+    logout()
+    navigate('/login')
+  }
 
   return (
-    <header className="topbar">
-      <div style={{ flex: 1 }}>
-        <div className="topbar-title">{title}</div>
-        {subtitle && <div className="topbar-subtitle">{subtitle}</div>}
+    <header className="topnav">
+      <div className="topnav-left">
+        <div className="logo-container" style={{ cursor: 'pointer' }} onClick={() => navigate('/projects')}>
+          <div className="logo-icon">
+            <Workflow size={16} />
+          </div>
+          agile<span>forge</span>
+        </div>
+
+        <button className="topnav-explore-btn" onClick={() => navigate('/projects')}>
+          Explore Projects <ChevronDown size={14} />
+        </button>
       </div>
-      <div className="search-bar" style={{ width: 220 }}>
-        <Search size={14} />
-        <input placeholder="Search issues..." />
+
+      <div className="topnav-search">
+        <Search size={16} />
+        <input placeholder="What do you want to manage?" />
       </div>
-      <button className="btn-icon">
-        <Bell size={15} />
-      </button>
-      <img className="avatar" src={user?.avatar} alt={user?.name} title={user?.name} />
+
+      <div className="topnav-right">
+        <span className="topnav-link" style={{ cursor: 'pointer' }} onClick={() => navigate('/projects')}>
+          My Projects
+        </span>
+
+        <button className="btn-icon">
+          <Globe size={18} />
+        </button>
+        <button className="btn-icon">
+          <Bell size={18} />
+        </button>
+
+        <div className="topnav-user-menu" onClick={() => setDropdownOpen(!dropdownOpen)}>
+          <img className="avatar" src={user?.avatar} alt={user?.name} title={user?.name} />
+          {dropdownOpen && (
+            <div className="topnav-dropdown" onMouseLeave={() => setDropdownOpen(false)}>
+              <div className="dropdown-user-info">
+                <div className="dropdown-user-name">{user?.name}</div>
+                <div className="dropdown-user-role">{user?.role?.replace('_', ' ')}</div>
+              </div>
+              <button className="dropdown-item" onClick={handleLogout}>
+                <LogOut size={14} /> Logout
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
     </header>
   )
 }

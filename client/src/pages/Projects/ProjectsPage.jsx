@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { Plus, Folder, Users, LayoutDashboard, Zap } from 'lucide-react'
+import { Plus, Folder, FolderOpen } from 'lucide-react'
 import api from '../../services/api'
 import useAuthStore from '../../store/authStore'
 import useAppStore from '../../store/appStore'
 
 function CreateProjectModal({ onClose }) {
-  const [form, setForm] = useState({ name: '', key: '', description: '', category: 'software', color: '#6366f1' })
+  const [form, setForm] = useState({ name: '', key: '', description: '', category: 'software', color: '#0056d2' })
   const qc = useQueryClient()
   const { showNotification } = useAppStore()
   const navigate = useNavigate()
@@ -25,7 +25,7 @@ function CreateProjectModal({ onClose }) {
   const handle = f => setForm(p => ({ ...p, ...f }))
   const submit = e => { e.preventDefault(); mutation.mutate(form) }
 
-  const COLORS = ['#6366f1','#ec4899','#14b8a6','#f59e0b','#22c55e','#ef4444','#a855f7','#3b82f6']
+  const COLORS = ['#0056d2','#ec4899','#14b8a6','#f59e0b','#22c55e','#ef4444','#a855f7','#3b82f6']
 
   return (
     <div className="modal-overlay" onClick={e => e.target === e.currentTarget && onClose()}>
@@ -95,8 +95,8 @@ export default function ProjectsPage() {
     <div className="fade-in">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 style={{ fontSize: 22, fontWeight: 800 }}>Projects</h1>
-          <p className="text-muted text-sm mt-4" style={{ marginTop: 4 }}>{projects.length} active projects</p>
+          <h1 style={{ fontSize: 24, fontWeight: 800, color: '#1f1f1f', letterSpacing: '-0.5px' }}>My Courses & Projects</h1>
+          <p className="text-muted text-sm" style={{ marginTop: 4 }}>Manage and track your active workspace programs ({projects.length} programs)</p>
         </div>
         {(user?.role === 'admin' || user?.role === 'project_lead') && (
           <button className="btn btn-primary" onClick={() => setShowCreate(true)}>
@@ -109,35 +109,63 @@ export default function ProjectsPage() {
         <div className="empty-state">
           <div className="empty-state-icon">📁</div>
           <div className="empty-state-title">No projects yet</div>
-          <div className="empty-state-text">Create your first project to get started</div>
+          <div className="empty-state-text">Create your first project program to get started</div>
         </div>
       ) : (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px,1fr))', gap: 16 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 24 }}>
           {projects.map(proj => (
-            <div key={proj._id} className="project-card" style={{ borderTop: `3px solid ${proj.color}` }}
+            <div key={proj._id} className="project-card"
               onClick={() => navigate(`/projects/${proj._id}/dashboard`)}
             >
-              <div className="flex items-center gap-3 mb-4" style={{ marginBottom: 14 }}>
-                <div style={{ width: 40, height: 40, borderRadius: 10, background: proj.color + '22', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <Folder size={20} style={{ color: proj.color }} />
-                </div>
-                <div>
-                  <div style={{ fontWeight: 700, fontSize: 15 }}>{proj.name}</div>
-                  <div style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-muted)' }}>{proj.key}</div>
-                </div>
-                <span className={`badge badge-${proj.status === 'active' ? 'green' : 'gray'}`} style={{ marginLeft: 'auto' }}>{proj.status}</span>
+              <div className="project-card-banner" style={{ background: `linear-gradient(135deg, ${proj.color || '#0056d2'}, ${proj.color || '#0056d2'}bb)` }}>
+                <span className={`badge badge-${proj.status === 'active' ? 'green' : 'gray'}`} style={{ position: 'absolute', top: 12, right: 12 }}>
+                  {proj.status}
+                </span>
               </div>
-              <p style={{ fontSize: 12, color: 'var(--text-muted)', marginBottom: 16, lineHeight: 1.6 }}>{proj.description || 'No description'}</p>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  {proj.members?.slice(0,4).map(m => (
-                    <img key={m._id} className="avatar avatar-sm" src={m.avatar} alt={m.name} title={m.name} style={{ border: '2px solid var(--bg-card)', marginLeft: -6 }} />
-                  ))}
-                  {proj.members?.length > 4 && <span style={{ fontSize: 11, color: 'var(--text-muted)' }}>+{proj.members.length - 4}</span>}
+              <div className="project-card-body">
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 8 }}>
+                  <div style={{ width: 20, height: 20, borderRadius: 4, background: (proj.color || '#0056d2') + '15', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <Folder size={11} style={{ color: proj.color || '#0056d2' }} />
+                  </div>
+                  <span style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-muted)' }}>
+                    {proj.category || 'software'} program
+                  </span>
                 </div>
-                <div className="flex gap-2">
-                  <button className="btn btn-ghost btn-sm" onClick={e => { e.stopPropagation(); navigate(`/projects/${proj._id}/board`) }}>
-                    <Zap size={12} /> Board
+
+                <div className="project-card-title">{proj.name}</div>
+                <div className="project-card-key">{proj.key}</div>
+                
+                <p className="project-card-desc">
+                  {proj.description || 'No program description provided for this project.'}
+                </p>
+
+                <div className="project-card-footer">
+                  <div className="flex items-center gap-2">
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                      {proj.members?.slice(0, 4).map((m, idx) => (
+                        <img
+                          key={m._id}
+                          className="avatar avatar-sm"
+                          src={m.avatar}
+                          alt={m.name}
+                          title={m.name}
+                          style={{
+                            border: '2px solid var(--bg-card)',
+                            marginLeft: idx > 0 ? -8 : 0,
+                            zIndex: 4 - idx
+                          }}
+                        />
+                      ))}
+                      {proj.members?.length > 4 && (
+                        <span style={{ fontSize: 11, color: 'var(--text-muted)', marginLeft: 6 }}>
+                          +{proj.members.length - 4}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                  
+                  <button className="btn btn-primary btn-sm" style={{ padding: '6px 14px', borderRadius: 4 }}>
+                    Go to project
                   </button>
                 </div>
               </div>
