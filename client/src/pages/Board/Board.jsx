@@ -9,11 +9,11 @@ import api from '../../services/api'
 import useAppStore from '../../store/appStore'
 
 const COLUMNS = [
-  { id: 'backlog',    label: 'Backlog',     color: '#8b8fa8' },
-  { id: 'todo',       label: 'To Do',       color: '#3b82f6' },
-  { id: 'inprogress', label: 'In Progress', color: '#f59e0b' },
-  { id: 'inreview',   label: 'In Review',   color: '#a855f7' },
-  { id: 'done',       label: 'Done',        color: '#22c55e' }
+  { id: 'backlog',    label: 'Backlog',     color: 'var(--text-muted)' },
+  { id: 'todo',       label: 'To Do',       color: 'var(--accent)' },
+  { id: 'inprogress', label: 'In Progress', color: 'var(--warning)' },
+  { id: 'inreview',   label: 'In Review',   color: 'var(--purple)' },
+  { id: 'done',       label: 'Done',        color: 'var(--success)' }
 ]
 
 const PRIORITY_ICONS = {

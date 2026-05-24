@@ -2,16 +2,22 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { AreaChart, Area, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts'
-import { CheckCircle, AlertCircle, Zap, Users, TrendingUp, Clock } from 'lucide-react'
+import { CheckSquare, Bug, Zap, TrendingUp, ListTodo, BarChart2 } from 'lucide-react'
 import api from '../../services/api'
 
-const COLORS = { done: '#22c55e', inprogress: '#6366f1', inreview: '#a855f7', todo: '#3b82f6', backlog: '#8b8fa8' }
-const PIE_COLORS = ['#6366f1','#22c55e','#f59e0b','#ef4444','#8b8fa8']
+const COLORS = {
+  done:       '#4ade80',
+  inprogress: '#7c6af7',
+  inreview:   '#a78bfa',
+  todo:       '#60a5fa',
+  backlog:    '#55556a'
+}
+const PIE_COLORS = ['#7c6af7','#4ade80','#fbbf24','#f87171','#55556a']
 
 const CustomTooltip = ({ active, payload, label }) => {
   if (!active || !payload?.length) return null
   return (
-    <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 8, padding: '10px 14px', fontSize: 12 }}>
+    <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border-light)', borderRadius: 8, padding: '10px 14px', fontSize: 12 }}>
       <div style={{ fontWeight: 600, marginBottom: 4 }}>{label}</div>
       {payload.map(p => <div key={p.name} style={{ color: p.color }}>{p.name}: {p.value}</div>)}
     </div>
@@ -59,7 +65,6 @@ export default function Dashboard() {
     count: issues.filter(i => i.type === t).length
   }))
 
-  // Burndown mock (sprint velocity over time)
   const burndownData = activeSprint ? sprintIssues.map((_, i) => ({
     day: `Day ${i + 1}`,
     remaining: sprintIssues.length - Math.floor((i / sprintIssues.length) * sprintIssues.filter(x => x.status === 'done').length),
@@ -75,11 +80,11 @@ export default function Dashboard() {
   }
 
   const actionIcon = (a) => {
-    if (a.includes('status')) return '🔄'
-    if (a.includes('comment')) return '💬'
-    if (a.includes('created')) return '✨'
+    if (a.includes('status')) return '→'
+    if (a.includes('comment')) return '·'
+    if (a.includes('created')) return '+'
     if (a.includes('sprint')) return '⚡'
-    return '📋'
+    return '·'
   }
 
   return (
@@ -87,25 +92,25 @@ export default function Dashboard() {
       {/* KPI Row */}
       <div className="kpi-grid mb-6" style={{ marginBottom: 24 }}>
         <div className="kpi-card purple">
-          <div className="kpi-icon">📋</div>
+          <div className="kpi-icon"><ListTodo size={18} /></div>
           <div className="kpi-label">Total Issues</div>
           <div className="kpi-value">{issues.length}</div>
           <div className="kpi-change">{openIssues.length} open · {doneIssues.length} done</div>
         </div>
         <div className="kpi-card green">
-          <div className="kpi-icon">✅</div>
+          <div className="kpi-icon"><CheckSquare size={18} /></div>
           <div className="kpi-label">Completion Rate</div>
           <div className="kpi-value">{convRate}%</div>
           <div className="kpi-change">{doneIssues.length} of {issues.length} resolved</div>
         </div>
         <div className="kpi-card yellow">
-          <div className="kpi-icon">⚡</div>
+          <div className="kpi-icon"><Zap size={18} /></div>
           <div className="kpi-label">Active Sprint</div>
           <div className="kpi-value">{activeSprint ? sprintIssues.length : '—'}</div>
           <div className="kpi-change">{activeSprint ? activeSprint.name : 'No active sprint'}</div>
         </div>
         <div className="kpi-card red">
-          <div className="kpi-icon">🐛</div>
+          <div className="kpi-icon"><Bug size={18} /></div>
           <div className="kpi-label">Open Bugs</div>
           <div className="kpi-value">{bugs.filter(b => b.status !== 'done').length}</div>
           <div className="kpi-change">{bugs.length} total bugs</div>
