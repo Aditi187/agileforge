@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { Workflow } from 'lucide-react'
 import useAuthStore from '../../store/authStore'
 
 const DEMO = [
@@ -26,7 +27,9 @@ export default function Login() {
     <div className="auth-page">
       <div className="auth-card fade-in">
         <div className="auth-logo">
-          <div className="logo-icon" style={{ fontSize: 24 }}>⚡</div>
+          <div className="logo-icon">
+            <Workflow size={22} color="#fff" />
+          </div>
           <span className="auth-logo-text">AgileForge</span>
         </div>
 

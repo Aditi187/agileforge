@@ -11,7 +11,7 @@
     "build": "cd client && npm run build"
   },
   "keywords": ["mern", "project-management", "agile", "kanban", "jira"],
-  "author": "AgileForge",
+  "author": "Aditi Sharma",
   "license": "MIT",
   "devDependencies": {
     "concurrently": "^8.2.2"

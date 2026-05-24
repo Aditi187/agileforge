@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate, useLocation, useParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import {
-  LayoutDashboard, Kanban, List, Zap, Users, FolderOpen, LogOut
+  LayoutDashboard, Kanban, List, Zap, Users, FolderOpen, LogOut, Workflow
 } from 'lucide-react'
 import useAuthStore from '../../store/authStore'
 import useAppStore from '../../store/appStore'
@@ -44,7 +44,9 @@ export default function Sidebar() {
   return (
     <aside className="sidebar">
       <div className="sidebar-logo">
-        <div className="logo-icon">⚡</div>
+        <div className="logo-icon">
+          <Workflow size={16} color="#fff" />
+        </div>
         <span>AgileForge</span>
       </div>
 
