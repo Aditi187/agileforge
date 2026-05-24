@@ -24,18 +24,18 @@ export default function Topbar() {
         </div>
 
         <button className="topnav-explore-btn" onClick={() => navigate('/projects')}>
-          Explore Projects <ChevronDown size={14} />
+          Projects <ChevronDown size={14} />
         </button>
       </div>
 
       <div className="topnav-search">
         <Search size={16} />
-        <input placeholder="What do you want to manage?" />
+        <input placeholder="Search..." />
       </div>
 
       <div className="topnav-right">
         <span className="topnav-link" style={{ cursor: 'pointer' }} onClick={() => navigate('/projects')}>
-          My Projects
+          My Work
         </span>
 
         <button className="btn-icon">

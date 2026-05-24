@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { Plus, Folder, FolderOpen } from 'lucide-react'
+import { Plus, Folder } from 'lucide-react'
 import api from '../../services/api'
 import useAuthStore from '../../store/authStore'
 import useAppStore from '../../store/appStore'
@@ -95,8 +95,8 @@ export default function ProjectsPage() {
     <div className="fade-in">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 style={{ fontSize: 24, fontWeight: 800, color: '#1f1f1f', letterSpacing: '-0.5px' }}>My Courses & Projects</h1>
-          <p className="text-muted text-sm" style={{ marginTop: 4 }}>Manage and track your active workspace programs ({projects.length} programs)</p>
+          <h1 style={{ fontSize: 24, fontWeight: 800, color: '#1f1f1f', letterSpacing: '-0.5px' }}>Projects</h1>
+          <p className="text-muted text-sm" style={{ marginTop: 4 }}>{projects.length} active projects</p>
         </div>
         {(user?.role === 'admin' || user?.role === 'project_lead') && (
           <button className="btn btn-primary" onClick={() => setShowCreate(true)}>
@@ -109,7 +109,7 @@ export default function ProjectsPage() {
         <div className="empty-state">
           <div className="empty-state-icon">📁</div>
           <div className="empty-state-title">No projects yet</div>
-          <div className="empty-state-text">Create your first project program to get started</div>
+          <div className="empty-state-text">Create your first project to get started</div>
         </div>
       ) : (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 24 }}>
@@ -128,7 +128,7 @@ export default function ProjectsPage() {
                     <Folder size={11} style={{ color: proj.color || '#0056d2' }} />
                   </div>
                   <span style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-muted)' }}>
-                    {proj.category || 'software'} program
+                    {proj.category || 'software'} project
                   </span>
                 </div>
 
@@ -136,7 +136,7 @@ export default function ProjectsPage() {
                 <div className="project-card-key">{proj.key}</div>
                 
                 <p className="project-card-desc">
-                  {proj.description || 'No program description provided for this project.'}
+                  {proj.description || 'No description provided for this project.'}
                 </p>
 
                 <div className="project-card-footer">
@@ -165,7 +165,7 @@ export default function ProjectsPage() {
                   </div>
                   
                   <button className="btn btn-primary btn-sm" style={{ padding: '6px 14px', borderRadius: 4 }}>
-                    Go to project
+                    View Dashboard
                   </button>
                 </div>
               </div>

@@ -1,26 +1,21 @@
 :root {
-  /* Coursera-Inspired Color Palette */
   --bg-primary:    #ffffff;
   --bg-secondary:  #f5f7fa;
   --bg-card:       #ffffff;
   --bg-hover:      #f0f4f9;
   --bg-active:     #e2edf8;
 
-  /* Borders - Soft blue-grey, characteristic of Coursera */
   --border:        #d2d8e6;
   --border-light:  #e2e8f0;
 
-  /* Text - Coursera uses dark grey instead of pitch black, and medium grey for secondary */
   --text-primary:  #1f1f1f;
   --text-secondary:#373a3c;
   --text-muted:    #5f6368;
 
-  /* Accent - Coursera Blue */
   --accent:        #0056d2;
   --accent-hover:  #00419e;
   --accent-subtle: #eef4fc;
 
-  /* Semantic - Optimized for Light Background */
   --success: #2e7d32;
   --warning: #b78103;
   --danger:  #d32f2f;
@@ -35,7 +30,7 @@
   --shadow:    0 4px 16px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
 
-  --topbar-height:   64px; /* Slightly taller like Coursera header */
+  --topbar-height:   64px;
   --font:      'Open Sans', 'Source Sans Pro', 'Inter', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 }
@@ -56,18 +51,15 @@ a { color: inherit; text-decoration: none; }
 button { cursor: pointer; font-family: var(--font); border: none; background: none; }
 input, textarea, select { font-family: var(--font); }
 
-/* Scrollbar */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: #ccd2e0; border-radius: 99px; }
 ::-webkit-scrollbar-thumb:hover { background: #b0b7c7; }
 
-/* Layout */
 .app-layout { display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
 .main-content { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
 .page-body { flex: 1; overflow-y: auto; padding: 24px; }
 
-/* Topnav (replaces sidebar + old topbar) */
 .topnav {
   height: var(--topbar-height);
   background: var(--bg-primary);
@@ -175,7 +167,6 @@ input, textarea, select { font-family: var(--font); }
   padding-bottom: 2px;
 }
 
-/* User avatar container with dropdown toggling */
 .topnav-user-menu {
   position: relative;
   cursor: pointer;
@@ -225,7 +216,6 @@ input, textarea, select { font-family: var(--font); }
   color: var(--accent);
 }
 
-/* Project Header Banner & Tabs (Coursera course page style) */
 .project-banner {
   background: #f0f4fd;
   border-bottom: 1px solid var(--border);
@@ -283,7 +273,6 @@ input, textarea, select { font-family: var(--font); }
   line-height: 1.5;
 }
 
-/* Horizontal Sub-navigation tabs (sticky/inline at bottom of project banner) */
 .project-tabs-container {
   display: flex;
   gap: 24px;
@@ -314,14 +303,13 @@ input, textarea, select { font-family: var(--font); }
   height: 14px;
 }
 
-/* Buttons */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
   padding: 8px 18px;
-  border-radius: 4px; /* Coursera standard button border-radius */
+  border-radius: 4px;
   font-size: 13px;
   font-weight: 600;
   border: 1px solid transparent;
@@ -385,7 +373,6 @@ input, textarea, select { font-family: var(--font); }
   height: 14px;
 }
 
-/* Coursera-style Course Cards for Projects */
 .project-card {
   background: var(--bg-card);
   border: 1px solid #d2d8e6;
@@ -443,7 +430,6 @@ input, textarea, select { font-family: var(--font); }
   margin-top: auto;
 }
 
-/* Cards */
 .card {
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -453,7 +439,6 @@ input, textarea, select { font-family: var(--font); }
 }
 .card-sm { padding: 16px; }
 
-/* Badges (retained but colored for light backgrounds) */
 .badge {
   display: inline-flex; align-items: center; gap: 4px;
   padding: 3px 10px; border-radius: 4px;
@@ -469,7 +454,6 @@ input, textarea, select { font-family: var(--font); }
 .badge-teal { background: rgba(0, 121, 107, 0.08); color: var(--teal); }
 .badge-pink { background: rgba(194, 24, 91, 0.08); color: var(--pink); }
 
-/* Avatar */
 .avatar {
   width: 32px; height: 32px; border-radius: 50%;
   object-fit: cover; flex-shrink: 0;
@@ -478,7 +462,6 @@ input, textarea, select { font-family: var(--font); }
 .avatar-sm { width: 24px; height: 24px; }
 .avatar-lg { width: 44px; height: 44px; }
 
-/* Form inputs (Coursera uses simple light inputs with blue focus border) */
 .form-group { display: flex; flex-direction: column; gap: 6px; }
 .label { font-size: 12px; font-weight: 700; color: var(--text-secondary); }
 .input {
@@ -504,7 +487,6 @@ input, textarea, select { font-family: var(--font); }
   box-shadow: 0 0 0 3px rgba(0, 86, 210, 0.15);
 }
 
-/* Modal */
 .modal-overlay {
   position: fixed; inset: 0;
   background: rgba(0,0,0,0.4); backdrop-filter: blur(2px);
@@ -537,7 +519,6 @@ input, textarea, select { font-family: var(--font); }
   to { opacity: 1; transform: scale(1) translateY(0); }
 }
 
-/* KPI Cards */
 .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
 .kpi-card {
   background: var(--bg-card); border: 1px solid var(--border);
@@ -570,7 +551,6 @@ input, textarea, select { font-family: var(--font); }
 .kpi-card.yellow .kpi-icon { background: rgba(183, 129, 3, 0.06); color: var(--warning); }
 .kpi-card.red    .kpi-icon { background: rgba(211, 47, 47, 0.06); color: var(--danger); }
 
-/* Kanban Board & Columns for Light Mode */
 .kanban-board { display: flex; gap: 20px; overflow-x: auto; padding-bottom: 16px; height: 100%; }
 .kanban-column {
   flex-shrink: 0; width: 280px;
@@ -605,7 +585,6 @@ input, textarea, select { font-family: var(--font); }
 }
 .kanban-add-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(0, 86, 210, 0.04); }
 
-/* Issue Card in Light Mode */
 .issue-card {
   background: var(--bg-card); border: 1px solid #d2d8e6;
   border-radius: var(--radius-sm); padding: 14px;
@@ -628,19 +607,16 @@ input, textarea, select { font-family: var(--font); }
 }
 .issue-card-footer .avatar-sm { margin-left: auto; }
 
-/* Priority Colors for Light Mode */
 .priority-critical { color: var(--danger); }
 .priority-high { color: #d97706; }
 .priority-medium { color: #f59e0b; }
 .priority-low { color: var(--success); }
 
-/* Type Colors */
 .type-epic { color: var(--purple); }
 .type-story { color: var(--success); }
 .type-task { color: var(--accent); }
 .type-bug { color: var(--danger); }
 
-/* Table styling for Light Mode */
 .table-wrap { overflow-x: auto; background: white; border: 1px solid var(--border); border-radius: var(--radius); }
 table { width: 100%; border-collapse: collapse; }
 th {
@@ -654,7 +630,6 @@ td { padding: 14px 16px; border-bottom: 1px solid var(--border-light); font-size
 tr:hover td { background: var(--bg-hover); }
 tr:last-child td { border-bottom: none; }
 
-/* Auth Page styled like Coursera login */
 .auth-page {
   min-height: 100vh;
   display: flex;
@@ -723,7 +698,6 @@ tr:last-child td { border-bottom: none; }
   background: var(--accent-subtle);
 }
 
-/* Utilities */
 .flex { display: flex; }
 .items-center { align-items: center; }
 .justify-between { justify-content: space-between; }
@@ -741,11 +715,9 @@ tr:last-child td { border-bottom: none; }
 .truncate { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 
-/* Progress bar */
 .progress-bar { height: 6px; background: #e9ecef; border-radius: 3px; overflow: hidden; }
 .progress-fill { height: 100%; border-radius: 3px; transition: width 0.4s ease; }
 
-/* Spinner */
 .spinner {
   width: 32px; height: 32px; border: 3px solid #e9ecef;
   border-top-color: var(--accent); border-radius: 50%;
@@ -755,13 +727,11 @@ tr:last-child td { border-bottom: none; }
 
 .loading-center { display: flex; align-items: center; justify-content: center; height: 200px; }
 
-/* Empty state */
 .empty-state { text-align: center; padding: 48px 24px; background: white; border: 1px solid var(--border); border-radius: var(--radius); }
 .empty-state-icon { font-size: 48px; margin-bottom: 12px; opacity: 0.6; }
 .empty-state-title { font-size: 16px; font-weight: 700; margin-bottom: 6px; color: var(--text-primary); }
 .empty-state-text { font-size: 13px; color: var(--text-muted); }
 
-/* Chips */
 .chip {
   display: inline-flex; align-items: center; gap: 4px;
   padding: 3px 10px; border-radius: 20px;
@@ -773,14 +743,12 @@ tr:last-child td { border-bottom: none; }
 .chip-success { background: rgba(46, 125, 50, 0.06); color: var(--success); border-color: rgba(46, 125, 50, 0.2); }
 .chip-done { background: rgba(95, 99, 104, 0.06); color: var(--text-muted); border-color: var(--border-light); }
 
-/* Activity feed */
 .activity-item { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border-light); }
 .activity-item:last-child { border-bottom: none; }
 .activity-content { flex: 1; min-width: 0; }
 .activity-text { font-size: 13px; line-height: 1.5; color: var(--text-secondary); }
 .activity-time { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
 
-/* Backlog row */
 .backlog-row {
   display: flex;
   align-items: center;
@@ -794,7 +762,6 @@ tr:last-child td { border-bottom: none; }
   background: var(--bg-hover);
 }
 
-/* Animations */
 @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 .fade-in { animation: fadeIn 0.2s ease; }
 
