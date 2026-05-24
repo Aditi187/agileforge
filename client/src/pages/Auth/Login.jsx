@@ -21,7 +21,12 @@ export default function Login() {
     if (ok) navigate('/projects')
   }
 
-  const fillDemo = (d) => { setEmail(d.email); setPassword(d.password) }
+  const handleQuickSignIn = async (d) => {
+    setEmail(d.email)
+    setPassword(d.password)
+    const ok = await login(d.email, d.password)
+    if (ok) navigate('/projects')
+  }
 
   return (
     <div className="auth-page">
@@ -59,13 +64,13 @@ export default function Login() {
         <div className="demo-login-options">
           <div className="demo-label">Quick Sign In</div>
           <div className="demo-buttons">
-            <button type="button" onClick={() => fillDemo(DEMO[0])} className="demo-btn">
+            <button type="button" onClick={() => handleQuickSignIn(DEMO[0])} className="demo-btn" disabled={loading}>
               Admin
             </button>
-            <button type="button" onClick={() => fillDemo(DEMO[1])} className="demo-btn">
+            <button type="button" onClick={() => handleQuickSignIn(DEMO[1])} className="demo-btn" disabled={loading}>
               Lead
             </button>
-            <button type="button" onClick={() => fillDemo(DEMO[2])} className="demo-btn">
+            <button type="button" onClick={() => handleQuickSignIn(DEMO[2])} className="demo-btn" disabled={loading}>
               Developer
             </button>
           </div>
