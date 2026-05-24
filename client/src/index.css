@@ -1,26 +1,26 @@
 :root {
-  --bg-primary: #0d0e14;
-  --bg-secondary: #13141c;
-  --bg-card: #1a1b26;
-  --bg-hover: #1e2030;
-  --bg-active: #24263a;
-  --border: #2a2d3e;
-  --border-light: #353858;
-  --text-primary: #e8eaf0;
-  --text-secondary: #8b8fa8;
-  --text-muted: #565972;
-  --accent: #6366f1;
-  --accent-hover: #7c7ff5;
-  --accent-subtle: rgba(99,102,241,0.12);
-  --success: #22c55e;
-  --warning: #f59e0b;
-  --danger: #ef4444;
-  --info: #3b82f6;
-  --purple: #a855f7;
-  --pink: #ec4899;
-  --teal: #14b8a6;
+  --bg-primary: #0e1117;
+  --bg-secondary: #161b22;
+  --bg-card: #21262d;
+  --bg-hover: #2d333b;
+  --bg-active: #373e47;
+  --border: #30363d;
+  --border-light: #444c56;
+  --text-primary: #c9d1d9;
+  --text-secondary: #8b949e;
+  --text-muted: #484f58;
+  --accent: #58a6ff;
+  --accent-hover: #1f6feb;
+  --accent-subtle: rgba(88, 166, 255, 0.12);
+  --success: #3fb950;
+  --warning: #d29922;
+  --danger: #f85149;
+  --info: #58a6ff;
+  --purple: #bc8cff;
+  --pink: #ff7b72;
+  --teal: #3fb950;
   --radius-sm: 6px;
-  --radius: 10px;
+  --radius: 8px;
   --radius-lg: 16px;
   --shadow: 0 4px 24px rgba(0,0,0,0.4);
   --shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
@@ -77,10 +77,10 @@ input, textarea, select { font-family: var(--font); }
 }
 .sidebar-logo .logo-icon {
   width: 32px; height: 32px;
-  background: linear-gradient(135deg, var(--accent), var(--purple));
-  border-radius: 8px;
+  background: var(--bg-hover);
+  border: 1px solid var(--border);
+  border-radius: 6px;
   display: flex; align-items: center; justify-content: center;
-  font-size: 16px;
 }
 .sidebar-section { padding: 8px 10px; }
 .sidebar-label {
@@ -241,17 +241,17 @@ input, textarea, select { font-family: var(--font); }
   background: var(--bg-card); border: 1px solid var(--border);
   border-radius: var(--radius); padding: 20px;
   position: relative; overflow: hidden;
-  transition: border-color 0.2s, transform 0.2s;
+  transition: border-color 0.2s, background-color 0.2s;
 }
-.kpi-card:hover { border-color: var(--border-light); transform: translateY(-2px); }
+.kpi-card:hover { border-color: var(--border-light); background: var(--bg-hover); }
 .kpi-card::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0;
-  height: 3px; border-radius: var(--radius) var(--radius) 0 0;
+  content: ''; position: absolute; top: 0; left: 0; bottom: 0;
+  width: 3px;
 }
-.kpi-card.purple::before { background: linear-gradient(90deg, var(--accent), var(--purple)); }
-.kpi-card.green::before { background: linear-gradient(90deg, var(--success), var(--teal)); }
-.kpi-card.yellow::before { background: linear-gradient(90deg, var(--warning), #f97316); }
-.kpi-card.red::before { background: linear-gradient(90deg, var(--danger), var(--pink)); }
+.kpi-card.purple::before { background: var(--accent); }
+.kpi-card.green::before { background: var(--success); }
+.kpi-card.yellow::before { background: var(--warning); }
+.kpi-card.red::before { background: var(--danger); }
 .kpi-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); }
 .kpi-value { font-size: 32px; font-weight: 800; margin: 6px 0 4px; }
 .kpi-change { font-size: 12px; color: var(--text-muted); }
@@ -342,8 +342,6 @@ tr:last-child td { border-bottom: none; }
 .auth-page {
   min-height: 100vh; display: flex; align-items: center; justify-content: center;
   background: var(--bg-primary);
-  background-image: radial-gradient(ellipse at 20% 50%, rgba(99,102,241,0.08) 0%, transparent 60%),
-    radial-gradient(ellipse at 80% 20%, rgba(168,85,247,0.06) 0%, transparent 50%);
 }
 .auth-card {
   width: 100%; max-width: 420px;
@@ -357,10 +355,10 @@ tr:last-child td { border-bottom: none; }
 }
 .auth-logo .logo-icon {
   width: 44px; height: 44px;
-  background: linear-gradient(135deg, var(--accent), var(--purple));
-  border-radius: 12px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
   display: flex; align-items: center; justify-content: center;
-  font-size: 22px;
 }
 .auth-logo-text { font-size: 22px; font-weight: 800; }
 .auth-title { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
